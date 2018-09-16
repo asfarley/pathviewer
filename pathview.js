@@ -24,7 +24,7 @@ $('document').ready(function(){
 	
 	movements_list = [];
 	detections_list = [];
-
+	
 	var movements_drop = document.getElementById('drop-movements');
 	var movements_list_div = document.getElementById('trajectories-list');
 	
@@ -47,8 +47,9 @@ $('document').ready(function(){
 					var mv = document.createElement("li");
 					mv.classList.add("list-group-item");
 					mv.innerHTML = Truncate(JSON.stringify(element));
-					movements_list_div.appendChild(mv);    
+					movements_list_div.appendChild(mv);
 				});
+				selected_movement = movements_list[0];
 			}
 			else if (filename.includes("Detections.json"))
 			{
