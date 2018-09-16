@@ -11,6 +11,8 @@
   </head>
   <body>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+  
   <h1>Pathview</h1>
   <p>by Roadometry <img src="https://www.roadometry.com/BigLogo.png" height="20" width="20"/></p>
   <div class="container">
@@ -25,9 +27,9 @@
 				Drop Detections.json
 			</div>
 			
-			<div id="trajectories-list">
+			<div>
 			<h3>Trajectories</h3>
-			<ul class="list-group">
+			<ul id="trajectories-list" class="list-group">
 			  <li class="list-group-item">--</li>
 			  <li class="list-group-item">--</li>
 			  <li class="list-group-item">--</li>
@@ -35,9 +37,8 @@
 			</div>
 		</div>
 		
-		<div class="col-md" id="display">
-			<canvas width="400" height="1000" style="border:1px solid #000000; background-color:black;">
-			</canvas>
+		<div class="col-md" >
+			<div id="display" width="400" height="600"></div>
 		</div>
 		
 		<div class="col-sm controls" id="controls-right">
@@ -53,7 +54,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
   
-  <script src="pathview.js"></script>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js"></script>
+  <script src="pathview.js"></script>
+  <script src="sketch.js"></script>
   </body>
 </html>
