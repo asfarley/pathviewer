@@ -12,6 +12,42 @@
   <body>
   
   <h1>Pathview</h1>
+  <br><br>
+  <div class="container">
+	  <div class="row">
+	  
+		<div class="col-sm controls" id="controls-left">
+			<div class="drop" id="drop-movements">
+				Drop Movements.json
+			</div>
+			
+			<div class="drop" id="drop-detections">
+				Drop Detections.json
+			</div>
+			
+			<div id="trajectories-list">
+			<h3>Trajectories</h3>
+			<ul class="list-group">
+			  <li class="list-group-item">--</li>
+			  <li class="list-group-item">--</li>
+			  <li class="list-group-item">--</li>
+			</ul>
+			</div>
+		</div>
+		
+		<div class="col-md" id="display">
+			<canvas width="400" height="1000" style="border:1px solid #000000;">
+			</canvas>
+		</div>
+		
+		<div class="col-sm controls" id="controls-right">
+			<input type="checkbox" name="show-movements" checked> Show movements<br>
+			<input type="checkbox" name="show-detections" checked> Show detections<br>
+			<input type="checkbox" name="show-endpoints" checked> Show endpoints<br>
+		</div>
+	  
+	  </div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
