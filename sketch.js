@@ -3,16 +3,16 @@ selected_movement.StateEstimates = [];
 
 function setup()
 {
-	var canvas = createCanvas(400, 600, WEBGL);
+	var canvas = createCanvas(400, 1000, WEBGL);
 	canvas.parent('display');
 }
 
-function draw_movement(state_estimates_list)
+function draw_movement(state_estimates_list, frame)
 {
 	state_estimates_list.forEach(function(state_estimate,index) {
 		var x = state_estimate.X;
 		var y = state_estimate.Y;
-		var z = index;
+		var z = frame;
 		draw_point(x,z,y);
 	});
 }
@@ -39,9 +39,9 @@ function draw()
 	background(255);
 	orbitControl();
 	box();
-
-	if(selected_movement != [])
-	{
-		draw_movement(selected_movement.StateEstimates);
-	}
+	
+	movements_list.forEach(function(movement) {
+		draw_movement(movement.StateEstimates, movement.FirstDetectionFrame);
+	});
+	
 }
