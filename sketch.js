@@ -3,7 +3,7 @@ selected_movement.StateEstimates = [];
 
 function setup()
 {
-	var canvas = createCanvas(400, 400, WEBGL);
+	var canvas = createCanvas(600, 600, WEBGL);
 	canvas.parent('display');
 }
 
@@ -27,7 +27,7 @@ function draw_movement(state_estimates_list, frame)
 	}
 }
 
-function draw_point(x,z,y)
+function draw_point(x,y,z)
 {
 	push();
 	translate(x,y,z);
