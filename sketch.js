@@ -12,7 +12,7 @@ function draw_movement(state_estimates_list, frame)
 	state_estimates_list.forEach(function(state_estimate,index) {
 		var x = state_estimate.X;
 		var y = state_estimate.Y;
-		var z = frame;
+		var z = frame  + index;
 		//draw_point(x,z,y);
 	});
 	
@@ -22,7 +22,7 @@ function draw_movement(state_estimates_list, frame)
 		{
 			this_state_estimate = state_estimates_list[i];
 			next_state_estimate = state_estimates_list[i+1];
-			draw_line(this_state_estimate.X,this_state_estimate.Y,frame,next_state_estimate.X,next_state_estimate.Y,frame+1);
+			draw_line(this_state_estimate.X,this_state_estimate.Y,frame+i,next_state_estimate.X,next_state_estimate.Y,frame+i+1);
 		}	
 	}
 }
@@ -49,7 +49,7 @@ function draw()
 	background(255);
 	orbitControl();
 	
-	if(movements_list.length == 0)
+	if(movements_list.length == 0 && detections_list.length == 0)
 	{
 		box();
 	}
@@ -58,4 +58,9 @@ function draw()
 		draw_movement(movement.StateEstimates, movement.FirstDetectionFrame);
 	});
 	
+	detections_list.forEach(function(detections,index) {
+		detections.Measurements.forEach(function(detection) {
+			draw_point(detection.X, detection.Y, index);
+		});
+	});
 }
