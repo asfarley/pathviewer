@@ -56,8 +56,8 @@ $('document').ready(function(){
 				detections_list = TextToJSONList(list_text);
 			}
 		};
-		console.log(JSON.stringify(movements_list));
-		console.log(JSON.stringify(detections_list));
+		//console.log(JSON.stringify(movements_list));
+		//console.log(JSON.stringify(detections_list));
 		reader.readAsText(file);
 
 		return false;
@@ -88,8 +88,8 @@ $('document').ready(function(){
 				detections_list = TextToJSONList(list_text);
 			}
 		};
-		console.log(JSON.stringify(movements_list));
-		console.log(JSON.stringify(detections_list));
+		//console.log(JSON.stringify(movements_list));
+		//console.log(JSON.stringify(detections_list));
 		reader.readAsText(file);
 
 		return false;

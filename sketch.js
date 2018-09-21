@@ -1,20 +1,20 @@
 selected_movement = [];
 selected_movement.StateEstimates = [];
+p5.disableFriendlyErrors = true; // disables FES
 
 function setup()
 {
-	var canvas = createCanvas(600, 600, WEBGL);
+	var canvas = createCanvas(700, 700, WEBGL);
 	canvas.parent('display');
 }
 
 function draw_movement(state_estimates_list, frame)
 {
-	state_estimates_list.forEach(function(state_estimate,index) {
-		var x = state_estimate.X;
-		var y = state_estimate.Y;
-		var z = frame  + index;
-		//draw_point(x,z,y);
-	});
+	var first_state_estimate = state_estimates_list[0];
+	var last_state_estimate = state_estimates_list[state_estimates_list.length -1];
+	
+	draw_point(first_state_estimate.X,first_state_estimate.Y,frame,255,255,0,15);
+	draw_point(last_state_estimate.X,last_state_estimate.Y,frame + state_estimates_list.length -1,0,0,255,15);
 	
 	var i;
 	for (i = 0; i < state_estimates_list.length; i++) {
@@ -27,12 +27,13 @@ function draw_movement(state_estimates_list, frame)
 	}
 }
 
-function draw_point(x,y,z)
+function draw_point(x,y,z,stroke_r,stroke_g,stroke_b,diameter)
 {
 	push();
 	translate(x,y,z);
-	stroke(0);
-	ellipse(5,5,5);
+	stroke(stroke_r, stroke_g, stroke_b);
+	fill(stroke_r,stroke_g,stroke_b);
+	ellipse(diameter,diameter,diameter);
 	pop();
 }
 
@@ -60,7 +61,7 @@ function draw()
 	
 	detections_list.forEach(function(detections,index) {
 		detections.Measurements.forEach(function(detection) {
-			draw_point(detection.X, detection.Y, index);
+			draw_point(detection.X, detection.Y, index,0,0,0,5);
 		});
 	});
 }
