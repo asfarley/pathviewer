@@ -42,14 +42,14 @@ $('document').ready(function(){
 			if(filename.includes("Movements.json"))
 			{
 				movements_list = TextToJSONList(list_text);
-				movements_list_div.innerHTML = '';
-				movements_list.forEach(function(element){
-					var mv = document.createElement("li");
-					mv.classList.add("list-group-item");
-					mv.innerHTML = Truncate(JSON.stringify(element));
-					movements_list_div.appendChild(mv);
-				});
-				selected_movement = movements_list[0];
+				//movements_list_div.innerHTML = '';
+				//movements_list.forEach(function(element){
+				//	var mv = document.createElement("li");
+				//	mv.classList.add("list-group-item");
+				//	mv.innerHTML = Truncate(JSON.stringify(element));
+				//	movements_list_div.appendChild(mv);
+				//});
+				//selected_movement = movements_list[0];
 			}
 			else if (filename.includes("Detections.json"))
 			{
@@ -75,13 +75,13 @@ $('document').ready(function(){
 			if(filename.includes("Movements.json"))
 			{
 				movements_list = TextToJSONList(list_text);
-				movements_list_div.innerHTML = '';
-				movements_list.forEach(function(element){
-					var mv = document.createElement("li");
-					mv.classList.add("list-group-item");
-					mv.innerHTML = Truncate(JSON.stringify(element));
-					movements_list_div.appendChild(mv);    
-				});
+				//movements_list_div.innerHTML = '';
+				//movements_list.forEach(function(element){
+				//	var mv = document.createElement("li");
+				//	mv.classList.add("list-group-item");
+				//	mv.innerHTML = Truncate(JSON.stringify(element));
+				//	movements_list_div.appendChild(mv);    
+				//});
 			}
 			else if (filename.includes("Detections.json"))
 			{

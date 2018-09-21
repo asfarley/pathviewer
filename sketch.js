@@ -13,8 +13,8 @@ function draw_movement(state_estimates_list, frame)
 	var first_state_estimate = state_estimates_list[0];
 	var last_state_estimate = state_estimates_list[state_estimates_list.length -1];
 	
-	draw_point(first_state_estimate.X,first_state_estimate.Y,frame,255,255,0,15);
-	draw_point(last_state_estimate.X,last_state_estimate.Y,frame + state_estimates_list.length -1,0,0,255,15);
+	draw_ellipse(first_state_estimate.X,first_state_estimate.Y,frame,255,255,0,15); // First point: Yellow
+	draw_ellipse(last_state_estimate.X,last_state_estimate.Y,frame + state_estimates_list.length -1,0,0,255,15); // Last point: Blue
 	
 	var i;
 	for (i = 0; i < state_estimates_list.length; i++) {
@@ -27,7 +27,7 @@ function draw_movement(state_estimates_list, frame)
 	}
 }
 
-function draw_point(x,y,z,stroke_r,stroke_g,stroke_b,diameter)
+function draw_ellipse(x,y,z,stroke_r,stroke_g,stroke_b,diameter)
 {
 	push();
 	translate(x,y,z);
@@ -42,6 +42,15 @@ function draw_line(x1,y1,z1,x2,y2,z2)
 	push();
 	stroke(255,0,0);
 	line(x1,y1,z1,x2,y2,z2);
+	pop();
+}
+
+function draw_point(x,y,z)
+{
+	push();
+	//translate(x,y,z);
+	stroke(0);
+	point(x,y,z);
 	pop();
 }
 
@@ -61,7 +70,7 @@ function draw()
 	
 	detections_list.forEach(function(detections,index) {
 		detections.Measurements.forEach(function(detection) {
-			draw_point(detection.X, detection.Y, index,0,0,0,5);
+			draw_point(detection.X, detection.Y, index);
 		});
 	});
 }
