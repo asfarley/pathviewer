@@ -40,7 +40,7 @@ function set_theme_solarized()
 
 function resetview()
 {
-	camera(1000, -500, maxframe+500, 320, 240, minframe, 0, 0, 1);
+	camera(1000, -500, maxframe+500, 320, 240, minframe, 0, 0, -1);
 }
 
 function draw_movement(state_estimates_list, frame)
@@ -100,8 +100,13 @@ function draw()
 	background(background_color);
 	orbitControl();
 	
+	minframe = detections_list.length * ((document.getElementById('startrange').value)/1000.0);
+	maxframe = detections_list.length * ((document.getElementById('endrange').value)/1000.0);
+	
 	if(movements_list.length == 0 && detections_list.length == 0)
 	{
+		fill(detection_color);
+		stroke(movement_color);
 		box();
 	}
 	
