@@ -1,20 +1,60 @@
 selected_movement = [];
 selected_movement.StateEstimates = [];
 p5.disableFriendlyErrors = true; // disables FES
+movements_list = [];
+detections_list = [];
+minframe = 0;
+maxframe = 500;
+
+background_color = '#272822';
+movement_color = '#ae81ff';
+detection_color = '#f8f8f2';
+endpoint_color = '#f92672';
+startpoint_color = '#a6e22e';
+endpoint_radius = 8;
 
 function setup()
 {
-	var canvas = createCanvas(700, 700, WEBGL);
+	var canvas = createCanvas(1000, 700, WEBGL);
 	canvas.parent('display');
+	frameRate(5); // Attempt to refresh at starting FPS
+}
+
+function set_theme_monokai()
+{
+	background_color = '#272822';
+	movement_color = '#ae81ff';
+	detection_color = '#f8f8f2';
+	endpoint_color = '#f92672';
+	startpoint_color = '#a6e22e';	
+}
+
+function set_theme_solarized()
+{
+	background_color = '#002b36';
+	movement_color = '#268bd2';
+	detection_color = '#586e75';
+	endpoint_color = '#cb4b16';
+	startpoint_color = '#2aa198';	
+}
+
+function resetview()
+{
+	camera(1000, -500, maxframe+500, 320, 240, minframe, 0, 0, 1);
 }
 
 function draw_movement(state_estimates_list, frame)
 {
+	if(frame < minframe || frame > maxframe)
+	{
+		return;
+	}
+
 	var first_state_estimate = state_estimates_list[0];
 	var last_state_estimate = state_estimates_list[state_estimates_list.length -1];
 	
-	draw_ellipse(first_state_estimate.X,first_state_estimate.Y,frame,255,255,0,15); // First point: Yellow
-	draw_ellipse(last_state_estimate.X,last_state_estimate.Y,frame + state_estimates_list.length -1,0,0,255,15); // Last point: Blue
+	draw_ellipse(first_state_estimate.X,first_state_estimate.Y,frame,startpoint_color,endpoint_radius); 
+	draw_ellipse(last_state_estimate.X,last_state_estimate.Y,frame + state_estimates_list.length -1,endpoint_color,endpoint_radius); 
 	
 	var i;
 	for (i = 0; i < state_estimates_list.length; i++) {
@@ -27,12 +67,12 @@ function draw_movement(state_estimates_list, frame)
 	}
 }
 
-function draw_ellipse(x,y,z,stroke_r,stroke_g,stroke_b,diameter)
+function draw_ellipse(x,y,z,color,diameter)
 {
 	push();
 	translate(x,y,z);
-	stroke(stroke_r, stroke_g, stroke_b);
-	fill(stroke_r,stroke_g,stroke_b);
+	stroke(color);
+	fill(color);
 	ellipse(diameter,diameter,diameter);
 	pop();
 }
@@ -40,7 +80,8 @@ function draw_ellipse(x,y,z,stroke_r,stroke_g,stroke_b,diameter)
 function draw_line(x1,y1,z1,x2,y2,z2)
 {
 	push();
-	stroke(255,0,0);
+	stroke(movement_color);
+	strokeWeight(1);
 	line(x1,y1,z1,x2,y2,z2);
 	pop();
 }
@@ -48,15 +89,15 @@ function draw_line(x1,y1,z1,x2,y2,z2)
 function draw_point(x,y,z)
 {
 	push();
-	//translate(x,y,z);
-	stroke(0);
+	stroke(detection_color);
+	strokeWeight(2);
 	point(x,y,z);
 	pop();
 }
 
 function draw()
 {
-	background(255);
+	background(background_color);
 	orbitControl();
 	
 	if(movements_list.length == 0 && detections_list.length == 0)
@@ -65,10 +106,18 @@ function draw()
 	}
 	
 	movements_list.forEach(function(movement) {
+		if(movement.FirstDetectionFrame < minframe || movement.FirstDetectionFrame > maxframe)
+		{
+			return;
+		}
 		draw_movement(movement.StateEstimates, movement.FirstDetectionFrame);
 	});
 	
 	detections_list.forEach(function(detections,index) {
+		if(index < minframe || index > maxframe)
+		{
+			return;
+		}
 		detections.Measurements.forEach(function(detection) {
 			draw_point(detection.X, detection.Y, index);
 		});
